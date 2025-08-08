@@ -1,0 +1,42 @@
+canonical: https://fhir.ch/ig/notfallpass
+fhirVersion: 4.0.1
+id: ch.notfallpass.ig
+name: CHNotfallpassIG
+title: Notfallpass Schweiz – Implementierungsleitfaden
+status: active
+copyrightYear: 2025
+releaseLabel: ci-build
+version: 0.1.0
+publisher:
+  name: Swiss FHIR Community
+  url: https://fhir.ch
+contact:
+  - name: Swiss FHIR Community
+    telecom:
+      - system: url
+        value: https://fhir.ch
+description: >
+  Dieser Implementierungsleitfaden definiert einen Notfallpass für die Schweiz
+  auf Basis von CH Core Profilen und orientiert sich konzeptionell an in der Schweiz
+  verwendeten Inhalten, um die strukturierte Übermittlung kritischer Notfalldaten zu erleichtern.
+copyright: © 2025, Schweizer Community, Nutzung gemäss Lizenzhinweisen des Projekts.
+dependencies:
+  ch.fhir.ig.ch-core: current
+license: CC-BY-4.0
+parameters:
+  apply-publisher: true
+  apply-contact: true
+  show-inherited-invariants: false
+  usage-stats-opt-out: true
+pages:
+  index.md:
+    title: Startseite
+  use-cases.md:
+    title: Anwendungsfälle
+  StructureDefinition-index.md:
+    title: Profiles
+menu:
+  Startseite: index.html
+  Use Cases: use-cases.html
+  Profiles: StructureDefinition-index.html
+  Artifacts: artifacts.html
