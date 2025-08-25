@@ -1,4 +1,4 @@
-# Notfallpass Schweiz – Implementierungsleitfaden
+# Notfallpass Schweiz – Implementierungsleitfaden TEST
 
 Dieser Leitfaden definiert den Notfallpass als kompaktes, standardisiertes Austauschformat für kritische Gesundheitsinformationen, die im Akut- und Notfallkontext schnell verfügbar sein müssen. Ziel ist die sichere, interoperable Bereitstellung zentraler Informationen (Identität, Notfallkontakt, Allergien, Diagnosen, Medikamente, Vitalzeichen, relevante Befunde und Laborwerte) entlang der Versorgungskette in der Schweiz.
 
