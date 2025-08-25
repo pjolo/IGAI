@@ -10,18 +10,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install SUSHI globally
-        run: npm install -g sushi
-
-      - name: Run SUSHI global (mit absolutem Pfad)
+      - name: Run SUSHI via Docker
         run: |
-          SUSHI_PATH=$(npm root -g)/.bin/sushi
-          "$SUSHI_PATH" ./source
+          mkdir -p fsh-generated/resources
+          docker run --rm -v ${{ github.workspace }}:/work ghcr.io/fhir/sushi:latest sushi /work/source /work/fsh-generated/resources
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -33,7 +25,7 @@ jobs:
         run: curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/igpublisher.jar -o igpublisher.jar
 
       - name: Build IG
-        run: java -jar igpublisher.jar -ig . -no-sushi
+        run: java -jar igpublisher.jar -ig .
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
