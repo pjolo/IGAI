@@ -15,11 +15,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install SUSHI locally
-        run: npm install sushi
+      - name: Install SUSHI globally
+        run: npm install -g sushi
 
-      - name: Run SUSHI
-        run: npx sushi ./source
+      - name: Run SUSHI global (mit absolutem Pfad)
+        run: |
+          SUSHI_PATH=$(npm root -g)/.bin/sushi
+          "$SUSHI_PATH" ./source
 
       - name: Setup Java
         uses: actions/setup-java@v4
