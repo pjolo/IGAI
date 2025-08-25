@@ -10,14 +10,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install SUSHI
+        run: npm install -g sushi
+
+      - name: Run SUSHI
+        run: sushi ./source
+
       - name: Install Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Run SUSHI (falls verwendet)
-        run: npx sushi ./source
 
       - name: Download IG Publisher
         run: curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/igpublisher.jar -o igpublisher.jar
