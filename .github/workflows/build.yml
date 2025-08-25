@@ -18,6 +18,9 @@ jobs:
       - name: Install SUSHI
         run: npm install -g sushi
 
+      - name: Add npm global bin to PATH
+        run: echo "$(npm root -g)/.bin" >> $GITHUB_PATH
+
       - name: Run SUSHI
         run: sushi ./source
 
