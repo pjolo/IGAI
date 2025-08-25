@@ -5,21 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - uses: qligier/fhir-ig-action@v0.3.0
         with:
-          distribution: 'temurin'
-          java-version: '11'
-      - name: Download IG Publisher
-        run: |
-          mkdir -p input-cache
-          curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar -o input-cache/publisher.jar
-      - name: Run SUSHI
-        uses: docker://hl7fhir/ig-publisher-base:latest
-        with:
-          args: sushi
-      - name: Build Implementation Guide
-        run: java -jar input-cache/publisher.jar -ig ig.ini
+          ig-publisher: "latest"
+          sushi: "latest"    # oder "false" falls kein SUSHI benötigt
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
