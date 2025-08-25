@@ -12,7 +12,7 @@ jobs:
       - name: Build Implementation Guide
         uses: docker://hl7fhir/ig-publisher-base:latest
         with:
-          args: java -jar /home/publisher/bin/publisher.jar -ig ig.ini
+          args: java -jar input-cache/publisher.jar -ig ig.ini
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
