@@ -3,7 +3,7 @@
 Instance: Patient-UC1-20250205
 InstanceOf: CHNotfallpassPatient
 Title: "UC1 Patientin"
-Description: "Patientin im Notfallpass (UC1)"
+Description: "Patientin Notfallpass (UC1)"
 Usage: #example
 * identifier[0].system = "urn:oid:2.16.756.5.30.1.123.100.1" // Beispiel Versicherungs-ID System
 * identifier[0].value = "756.9217.1234.56"
