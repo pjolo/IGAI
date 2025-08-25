@@ -15,13 +15,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install SUSHI
-        run: npm install -g sushi
+      - name: Install SUSHI locally
+        run: npm install sushi
 
       - name: Run SUSHI
-        run: $(npm root -g)/.bin/sushi ./source
+        run: npx sushi ./source
 
-      - name: Install Java
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
