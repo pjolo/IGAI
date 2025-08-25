@@ -1,0 +1,32 @@
+name: Build FHIR IG
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run SUSHI (falls verwendet)
+        run: npx sushi ./source
+
+      - name: Download IG Publisher
+        run: curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/igpublisher.jar -o igpublisher.jar
+
+      - name: Build IG
+        run: java -jar igpublisher.jar -ig . -no-sushi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
