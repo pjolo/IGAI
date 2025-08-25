@@ -1,50 +1,24 @@
-name: Build and Deploy FHIR IG
-
-on:
-  push:
-    branches:
-      - main
-      - master
-    paths:
-      - ig-folder/**
-  pull_request:
-    branches:
-      - main
-      - master
-    paths:
-      - ig-folder/**
-
+name: Build the IG
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run SUSHI (optional, falls FSH genutzt wird)
-        uses: qligier/fhir-ig-action@v0.3.0
+      - uses: actions/checkout@v4
+      - name: Update IG Publisher
+        uses: docker://hl7fhir/ig-publisher-base:latest
         with:
-          working-directory: ig-folder
-          ig-publisher: "latest"
-          sushi: "latest"       # setze auf "false", falls du kein SUSHI brauchst
-
-      # Alternativ kannst du die HL7-Docker-Images direkt nutzen, z.B.:
-      # - name: Update IG Publisher
-      #   uses: docker://hl7fhir/ig-publisher-base:latest
-      #   with:
-      #     args: ./_updatePublisher.sh --force
-      # - name: Run SUSHI
-      #   uses: docker://hl7fhir/ig-publisher-base:latest
-      #   with:
-      #     args: sushi
-      # - name: Run IG Publisher
-      #   uses: docker://hl7fhir/ig-publisher-base:latest
-      #   with:
-      #     args: ./_genonce.sh -no-sushi
-
+          args: ./_updatePublisher.sh --force
+      - name: Run SUSHI
+        uses: docker://hl7fhir/ig-publisher-base:latest
+        with:
+          args: sushi
+      - name: Build Implementation Guide
+        uses: docker://hl7fhir/ig-publisher-base:latest
+        with:
+          args: ./_genonce.sh -no-sushi
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ig-folder/output
-
+          publish_dir: ./output
