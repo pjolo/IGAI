@@ -5,10 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update IG Publisher
-        uses: docker://hl7fhir/ig-publisher-base:latest
-        with:
-          args: ./_updatePublisher.sh --force
       - name: Run SUSHI
         uses: docker://hl7fhir/ig-publisher-base:latest
         with:
