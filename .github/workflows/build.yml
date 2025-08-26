@@ -1,16 +1,28 @@
-name: Build the IG
-on: [push, pull_request]
+name: Build and Deploy FHIR IG to GitHub Pages
+
+on: [push]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: qligier/fhir-ig-action@v0.3.0
         with:
           ig-publisher: "latest"
-          sushi: "latest"    # oder "false" falls kein SUSHI benötigt
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+          sushi: "latest"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output
+          path: ./output
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
