@@ -7,26 +7,6 @@ Id: ch-core-practitioner-epr
 Title: "CH Core Practitioner EPR"
 Description: "Schweizer Profil für Gesundheitsfachpersonen im EPD-Kontext (GLN, ggf. ZSR, Name, Kontaktinformationen, usw.). Siehe fhir.ch/ig/ch-core."
 
-* identifier 1..* MS
-* identifier[gln] 1..1
-* identifier[gln].system = "urn:oid:2.51.1.3"
-* identifier[gln].value 1..1
-* identifier[zsr] 0..1
-* identifier[zsr].system = "urn:oid:2.16.756.5.30.1.123.100.2.1.1"
-* name 1..* MS
-* name.family 1..1 MS
-* name.given 1..1 MS
-* telecom 0..* MS
-* telecom.system from http://terminology.hl7.org/CodeSystem/contact-point-system (required)
-* telecom.value 1..1 MS
-* telecom.extension contains http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-ech-46-emailcategory named emailcategory 0..*
-* address 0..* MS
-* gender 0..1 MS
-* gender ^short = "männlich | weiblich | other (kein unknown erlaubt)"
-* gender = #male or #female or #other
-* birthDate 0..1
-* qualification 0..* MS
-* communication 0..* MS
 
 Profile: CHNotfallpassPatient
 Parent: $CHCorePatient
