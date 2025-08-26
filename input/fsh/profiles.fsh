@@ -6,7 +6,9 @@ Parent: $CHCorePractitioner
 Id: ch-core-practitioner-epr
 Title: "CH Core Practitioner EPR"
 Description: "Schweizer Profil für Gesundheitsfachpersonen im EPD-Kontext (GLN, ggf. ZSR, Name, Kontaktinformationen, usw.). Siehe fhir.ch/ig/ch-core."
-
+* name 1..* MS
+* name.family 1..1 MS
+* name.given 1..* MS
 
 Profile: CHNotfallpassPatient
 Parent: $CHCorePatient
